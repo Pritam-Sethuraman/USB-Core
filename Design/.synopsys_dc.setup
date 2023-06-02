@@ -1,0 +1,33 @@
+#              This is the .synopsys_dc.setup file required 
+#              for use with the class.db synthesis technology library 
+#              This library is used by Synopsys for synthesis training 
+#              courses. 
+#              
+#              Henda ARIDHI
+#              April 22, 2012 
+set search_path [concat $search_path ./vhd  ./CMC/tools/synopsys.2010/syn/libraries/syn]
+set target_library  class.db
+set link_library  class.db
+set symbol_library  class.sdb
+set compile_fix_multiple_port_nets true
+define_design_lib WORK -path ./syn/work
+#              the bus naming syle determines how one refers to elements of 
+#              a bus in a dc_shell script such as count<2> if "%s<%d>" is the style 
+#              or count_2 if "%s_%d" is used as the style 
+#              the <%d> causes SDF problems since the SDF file refers to buses as count_reg_0 
+#              and does not use <> 
+
+set bus_naming_style  "%s<%d>"
+
+#              if you want to back annotate Synopsys SDF files onto Synopsys gate-level netlists 
+#              use the %s_%d bus naming style... but make sure that in your script 
+#              you refer to elements of buses as count_2, count_1 , etc !!! 
+#              For Xilinx generated netlists and SDF files there is no problem 
+#              can use the standard %s<%d> style */
+#              bus_naming_style = "%s_%d" 
+
+set bus_inference_style  "%s<%d>"
+set bus_dimension_separator_style "><"
+
+#              to write out EDI netlists, this must be set to "true" 
+set edifout_netlist_only  "true"
